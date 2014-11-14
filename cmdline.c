@@ -132,6 +132,7 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 	args_info->encryptproxy_given = 0;
 	args_info->encryptremproxy_given = 0;
 	args_info->proctitle_given = 0;
+	args_info->host_given = 0;
 
 /* No... we can't make this a function... -- Maniac */
 #define clear_args() \
@@ -157,6 +158,7 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 	args_info->encryptproxy_flag = 0; \
 	args_info->encryptremproxy_flag = 0; \
 	args_info->proctitle_arg = NULL; \
+	args_info->host_arg = NULL; \
 } 
 
 	clear_args();
@@ -189,6 +191,7 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 			{ "remproxy",		1, NULL, 'r' },
 			{ "remproxyauth",	1, NULL, 'R' },
 			{ "proctitle",		1, NULL, 'x' },
+			{ "host",		1, NULL, 'o' },
 			{ "header",			1, NULL, 'H' },
 			{ "verbose",		0, NULL, 'v' },
 			{ "ntlm",			0, NULL, 'N' },
@@ -201,9 +204,9 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 			{ NULL,				0, NULL, 0 }
 		};
 
-		c = getopt_long (argc, argv, "hVia:u:s:t:F:p:P:r:R:d:H:x:nvNeEXq", long_options, &option_index);
+		c = getopt_long (argc, argv, "hVia:u:s:t:F:p:P:r:R:d:H:x:nvNeEXqo:", long_options, &option_index);
 #else
-		c = getopt( argc, argv, "hVia:u:s:t:F:p:P:r:R:d:H:x:nvNeEXq" );
+		c = getopt( argc, argv, "hVia:u:s:t:F:p:P:r:R:d:H:x:nvNeEXqo:" );
 #endif
 
 		if (c == -1)
@@ -260,6 +263,12 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 				args_info->proctitle_given = 1;
 				message( "Proctitle override enabled\n" );
 				args_info->proctitle_arg = gengetopt_strdup (optarg);
+				break;
+
+			case 'o':
+				args_info->host_given = 1;
+				message( "Host-header override enabled\n" );
+				args_info->host_arg = gengetopt_strdup (optarg);
 				break;
 
 			case 'u':	/* Username to send to HTTPS proxy for authentication.  */
