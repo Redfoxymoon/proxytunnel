@@ -35,7 +35,7 @@ OPTFLAGS += -DSO_REUSEPORT
 #OPTFLAGS += -DHAVE_SYS_PSTAT_H
 
 # DARWIN
-#OPTFLAGS += -DDARWIN
+OPTFLAGS += -DDARWIN
 
 # CYGWIN
 #OPTFLAGS += -DCYGWIN
@@ -63,8 +63,6 @@ mandir = $(datadir)/man
 # Remove strlcpy/strlcat on (open)bsd/darwin systems
 OBJ = proxytunnel.o	\
 	base64.o	\
-	strlcpy.o	\
-	strlcat.o	\
 	strzcat.o	\
 	setproctitle.o	\
 	io.o		\
@@ -78,7 +76,7 @@ OBJ = proxytunnel.o	\
 
 .PHONY: all clean docs install
 
-all: proxytunnel docs
+all: proxytunnel # docs
 
 docs:
 	$(MAKE) -C docs
