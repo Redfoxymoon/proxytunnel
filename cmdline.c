@@ -267,7 +267,7 @@ int cmdline_parser( int argc, char * const *argv, struct gengetopt_args_info *ar
 
 			case 'o':
 				args_info->host_given = 1;
-				message( "Host-header override enabled\n" );
+				/* message( "Host-header override enabled\n" ); */
 				args_info->host_arg = gengetopt_strdup (optarg);
 				break;
 
