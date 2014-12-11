@@ -34,25 +34,23 @@
 char *basicauth(char *user, char *pass) {
 	char *b64str = malloc(80);
 
-	int len = strlen( user ) + strlen( pass ) + 2;
-	char *p = (char *) malloc( len );
+	int len = strlen(user) + strlen(pass) + 2;
+	char *p = (char *) malloc(len);
 
 	/* Set up the cookie in clear text */
-	sprintf( p, "%s:%s", user, pass );
+	sprintf(p, "%s:%s", user, pass);
 
 	/*
 	 * Base64 encode the clear text cookie to create the HTTP base64
 	 * authentication cookie
 	 */
-	base64( (unsigned char *)b64str, (unsigned char *)p, strlen(p) );
+	base64((unsigned char *)b64str, (unsigned char *)p, strlen(p));
 
-//	if( args_info.verbose_flag ) {
-//		message( "Proxy basic auth of %s is %s\n", p, basicauth );
+//	if(args_info.verbose_flag) {
+//		message("Proxy basic auth of %s is %s\n", p, basicauth);
 //	}
 
-	free( p );
+	free(p);
 
 	return b64str;
 }
-
-// vim:noexpandtab:ts=4
