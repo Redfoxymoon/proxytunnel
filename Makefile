@@ -11,8 +11,8 @@ else
 revision = $(shell echo '$$Revision$$' | sed -e 's/\$$Revision: \([0-9]\+\) \$$$$/\1/')
 endif
 
-CC ?= cc
-CFLAGS ?= -Wall -O2 -ggdb
+CC = gcc
+CFLAGS = -Wall -O2 -ggdb
 
 OPTFLAGS = -DREVISION=\"$(revision)\"
 
@@ -23,7 +23,7 @@ OPTFLAGS += -DHAVE_GETOPT_LONG
 OPTFLAGS += -DUSE_SSL
 
 # Most systems
-OPTFLAGS += -DSETPROCTITLE -DSPT_TYPE=2
+OPTFLAGS += -DSETPROCTITLE -DSPT_TYPE=2 #Broken on Cygwin?
 
 # Comment if you don't have this flag
 OPTFLAGS += -DSO_REUSEPORT
@@ -35,7 +35,7 @@ OPTFLAGS += -DSO_REUSEPORT
 #OPTFLAGS += -DHAVE_SYS_PSTAT_H
 
 # DARWIN
-OPTFLAGS += -DDARWIN
+#OPTFLAGS += -DDARWIN
 
 # CYGWIN
 #OPTFLAGS += -DCYGWIN
