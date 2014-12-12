@@ -151,7 +151,11 @@ int stream_enable_ssl(PTSTREAM *pts) {
 	
 	/* Initialise the connection */
 	SSLeay_add_ssl_algorithms();
+	#ifdef USE_TLS_v1_1
+	meth = TLSv1_1_client_method();
+	#else
 	meth = TLSv1_client_method();
+	#endif
 	SSL_load_error_strings();
 
 	ctx = SSL_CTX_new (meth);
@@ -195,5 +199,3 @@ int stream_get_outgoing_fd(PTSTREAM *pts) {
 		return pts->outgoing_fd;
 #endif /* USE_SSL */
 }
-
-// vim:noexpandtab:ts=4
