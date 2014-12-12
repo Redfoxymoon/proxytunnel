@@ -22,6 +22,9 @@ OPTFLAGS += -DHAVE_GETOPT_LONG
 # Comment if you don't have/want ssl
 OPTFLAGS += -DUSE_SSL
 
+# Uncomment to use TLSv1.1 else TLSv1 will be used
+#OPTFLAGS += -DUSE_TLS_v1_1
+
 # Most systems
 OPTFLAGS += -DSETPROCTITLE -DSPT_TYPE=2 #Broken on Cygwin?
 
